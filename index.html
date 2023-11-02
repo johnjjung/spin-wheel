@@ -56,9 +56,22 @@ const departments = [
 ];
 
 function pickRandomDepartment() {
-  const selectedDepartment = departments[Math.floor(Math.random() * departments.length)];
+  if (departments.length === 0) {
+    document.getElementById('result').textContent = 'We\'re done. All departments have been picked!';
+    return; // Exit the function if no departments left
+  }
+  
+  // Pick a random department
+  const index = Math.floor(Math.random() * departments.length);
+  const selectedDepartment = departments[index];
+  
+  // Remove the picked department from the array
+  departments.splice(index, 1);
+  
+  // Update the DOM with the selected department
   document.getElementById('result').textContent = `A random department selected is: ${selectedDepartment}`;
-  // Trigger confetti if it's defined
+  
+  // Trigger confetti
   if (typeof confetti === 'function') {
     confetti({
       particleCount: 100,
@@ -69,6 +82,7 @@ function pickRandomDepartment() {
     console.error('Confetti function is not defined.');
   }
 }
+
 </script>
 
 </body>

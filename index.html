@@ -36,6 +36,18 @@
     margin-top: 20px;
     font-size: 1.2em; /* Larger font size for the result */
   }
+
+  @keyframes fadeEffect {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* Apply the animation to the result div when it has the 'animating' class */
+.animating {
+  animation: fadeEffect 1s infinite;
+}
+
 </style>
 </head>
 <body>
@@ -57,36 +69,49 @@ const departments = [
 ];
 
 function pickRandomDepartment() {
+  const resultElement = document.getElementById('result');
+
   if (departments.length === 0) {
-    document.getElementById('result').textContent = 'We’re done. All departments have been picked!';
+    resultElement.textContent = 'We’re done. All departments have been picked!';
     return; // Exit the function if no departments are left
   }
-  
-  // Pick a random department
-  const index = Math.floor(Math.random() * departments.length);
-  const selectedDepartment = departments[index];
-  
-  // Remove the picked department from the array
-  departments.splice(index, 1);
-  
-  // Update the DOM with the selected department
-  document.getElementById('result').textContent = `A random department selected is: ${selectedDepartment}`;
-  
-  // Play cheerful sound
-  const sound = document.getElementById('cheerfulSound');
-  sound.play();
-  
-  // Trigger confetti
-  if (typeof confetti === 'function') {
-    confetti({
-      particleCount: 100,
-      spread: 70,
-      origin: { y: 0.6 }
-    });
-  } else {
-    console.error('Confetti function is not defined.');
-  }
+
+  // Indicate that a selection is being made with an animation
+  resultElement.textContent = 'Selecting a department...';
+  resultElement.classList.add('animating'); // Add the class to start the animation
+
+  // Set a timeout to delay the selection reveal and stop the animation
+  setTimeout(function () {
+    // Stop the animation
+    resultElement.classList.remove('animating');
+
+    // Pick a random department
+    const index = Math.floor(Math.random() * departments.length);
+    const selectedDepartment = departments[index];
+    
+    // Remove the picked department from the array
+    departments.splice(index, 1);
+    
+    // Update the DOM with the selected department
+    resultElement.textContent = `A random department selected is: ${selectedDepartment}`;
+    
+    // Play cheerful sound
+    const sound = document.getElementById('cheerfulSound');
+    sound.play();
+    
+    // Trigger confetti
+    if (typeof confetti === 'function') {
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+    } else {
+      console.error('Confetti function is not defined.');
+    }
+  }, 1500); // 3000 milliseconds delay for suspense
 }
+
 
 
 </script>

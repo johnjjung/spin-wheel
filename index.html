@@ -5,6 +5,38 @@
 <title>Random Department Selector</title>
 <!-- Include the confetti library -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.0/dist/confetti.browser.min.js"></script>
+<style>
+  body {
+    font-family: 'Arial', sans-serif; /* This is a nicer font, but you can choose any you like */
+    text-align: center; /* This will center the contents of the body, including your button */
+    margin: 0;
+    height: 100vh; /* Use full height to align flex items centrally */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #pickBtn {
+    background-color: #4CAF50; /* A nice shade of green, you can use any color */
+    color: white;
+    padding: 10px 20px; /* Increase padding to make the button bigger */
+    border: none;
+    border-radius: 5px; /* Rounded corners for the button */
+    font-size: 1em; /* Larger font size */
+    cursor: pointer; /* Cursor changes to a hand icon when you hover over the button */
+    transition: background-color 0.3s; /* Smooth transition for button on hover */
+  }
+
+  #pickBtn:hover {
+    background-color: #45a049; /* Slightly different shade when hovered for a nice effect */
+  }
+
+  #result {
+    margin-top: 20px;
+    font-size: 1.2em; /* Larger font size for the result */
+  }
+</style>
 </head>
 <body>
 

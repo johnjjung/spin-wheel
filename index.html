@@ -40,6 +40,7 @@
 </head>
 <body>
 
+<audio id="cheerfulSound" src="https://assets.mixkit.co/sfx/preview/mixkit-arcade-retro-changing-tab-206.mp3"></audio>
 <button id="pickBtn">Pick a Random Department</button>
 <div id="result"></div>
 
@@ -57,8 +58,8 @@ const departments = [
 
 function pickRandomDepartment() {
   if (departments.length === 0) {
-    document.getElementById('result').textContent = 'We\'re done. All departments have been picked!';
-    return; // Exit the function if no departments left
+    document.getElementById('result').textContent = 'We’re done. All departments have been picked!';
+    return; // Exit the function if no departments are left
   }
   
   // Pick a random department
@@ -71,6 +72,10 @@ function pickRandomDepartment() {
   // Update the DOM with the selected department
   document.getElementById('result').textContent = `A random department selected is: ${selectedDepartment}`;
   
+  // Play cheerful sound
+  const sound = document.getElementById('cheerfulSound');
+  sound.play();
+  
   // Trigger confetti
   if (typeof confetti === 'function') {
     confetti({
@@ -82,6 +87,7 @@ function pickRandomDepartment() {
     console.error('Confetti function is not defined.');
   }
 }
+
 
 </script>
 
